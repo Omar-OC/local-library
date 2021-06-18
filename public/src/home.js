@@ -8,15 +8,12 @@ function getTotalAccountsCount(accounts) {
 
 function getBooksBorrowedCount(books) {
   let counter = 0
-  for (let i = 0; i < books.length; i++){
-    const book = books[i].borrows
-    for (let i = 0; i < book.length; i++){
-      if (book[i].returned === false) {
-        counter += 1
-      }
-    }
+  books.forEach(book => {
+    if (book.borrows[0].returned === false) {
+    counter += 1
   }
-  return counter
+})
+return counter
 }
 
 function getMostCommonGenres(books) {
