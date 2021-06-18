@@ -1,9 +1,9 @@
 function getTotalBooksCount(books) {
-  return books.length
+  return books.reduce(book => book + 1, 0)
 }
 
 function getTotalAccountsCount(accounts) {
-  return accounts.length
+  return accounts.reduce(account => account +1, 0)
 }
 
 function getBooksBorrowedCount(books) {
@@ -37,7 +37,6 @@ function getMostCommonGenres(books) {
 }
 
 function getMostPopularBooks(books) {
-  // returns an array of five objects that represents the most popular books in the library.
   let popularBooks = []
   books.forEach(book => {
   const topFive = {name: book.title, count: book.borrows.length}
@@ -49,28 +48,13 @@ function getMostPopularBooks(books) {
 }
 
 function getMostPopularAuthors(books, authors) {
-  let mostPopular = []
-  for (let book of books) {
-    let bookRental = book.borrows
-    const author = mostPopular.find(
-      (currentAuthor) => currentAuthor.name === book.authorId)
-    if (author) {
-      author.count+ bookRental.length
-    } else {
-      mostPopular.push({ name: book.authorId, count: bookRental.length})
+  return books.map(book => {
+    const author = authors.find(author => author.id === book.authorId)
+    return {
+      name: `${author.name.first} ${author.name.last}`,
+      count: book.borrows.length
     }
-  }
-
-  mostPopular = mostPopular.map(author => {
-    let authorFound = authors.find( data => data.id === author.name)
-    return ({
-      name: `${authorFound.name.first} ${authorFound.name.last}`, count: author.count
-    })
-  })
-
-  let result = mostPopular.sort((authorA, authorB) => (authorA.count < authorB.count ? 1 : -1))
-  result = result.slice(0, 5)
-  return result
+  }).sort((a, b) => (b.count - a.count)).slice(0, 5)
 }
 
 module.exports = {
