@@ -1,15 +1,15 @@
 function findAccountById(accounts, id) {
-  let accountFound = accounts.find((account) => account.id === id)
+  let accountFound = accounts.find((account) => account.id === id);
   return accountFound
 }
 
 function sortAccountsByLastName(accounts) {
-  let orderedSurname = accounts.sort((nameA, nameB) => nameA.name.last.toLowerCase() < nameB.name.last.toLowerCase() ? -1 : 1)
+  let orderedSurname = accounts.sort((nameA, nameB) => nameA.name.last.toLowerCase() < nameB.name.last.toLowerCase() ? -1 : 1);
   return orderedSurname
 }
 
 function getTotalNumberOfBorrows(account, books) {
-  let counter = 0
+  let counter = 0;
   books.forEach(book => {
     for (let i = 0; i < book.borrows.length; i++){ 
       if (book.borrows[i].id === account.id) {
