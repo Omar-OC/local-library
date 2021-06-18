@@ -11,21 +11,13 @@ function sortAccountsByLastName(accounts) {
 function getTotalNumberOfBorrows(account, books) {
   let counter = 0
   books.forEach(book => {
-    if (book.borrows[0].id === account.id) {
-      counter += 1
-    }
-  })
-  return counter
-
-  /*
-  for (let i = 0; i < books.length; i++){
-    const book = books[i].borrows
-    for (let i = 0; i < book.length; i++){
-      if (book[i].id === account.id){
+    for (let i = 0; i < book.borrows.length; i++){ 
+      if (book.borrows[i].id === account.id) {
         counter += 1
       }
     }
-  } */
+  })
+  return counter
 }
 
 function getBooksPossessedByAccount(account, books, authors) {
