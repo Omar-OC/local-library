@@ -17,7 +17,6 @@ return counter
 }
 
 function getMostCommonGenres(books) {
-  // count the number of times each genre occurs in the books array/object
   const genres = [];
   books.forEach(book => {
     const match = genres.find(genre => genre.name === book.genre)

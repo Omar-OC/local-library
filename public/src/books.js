@@ -30,7 +30,7 @@ function partitionBooksByBorrowedStatus(books) {
 function getBorrowersForBook(book, accounts) {
   let result = [];
   let borrowArray = book.borrows;  
-  borrowArray.forEach(borrow=>{
+  borrowArray.filter(borrow=>{
     let account = accounts.find(acc => acc.id === borrow.id);
     let obj = account;
     obj['returned'] =  borrow.returned;
