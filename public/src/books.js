@@ -8,23 +8,29 @@ function findBookById(books, id) {
   return foundBook
 }
 
+// This function below is the helper function that will be inserted into the partitionBooksByBorrowedStatus function
+
+function splitBooksIntoArrays(book, notReturnedBook, returnedBook) {
+  for (let i = 0; i < book.length; i++){
+    if (book[i].returned === false){
+      notReturnedBook.push(book)
+      break;
+    }
+    if (book[i].returned === true) {
+      returnedBook.push(book)
+      break;
+    }
+  }
+}
+
 function partitionBooksByBorrowedStatus(books) {
   let notReturnedBook = [];
   let returnedBook = [];
   for (let i = 0; i < books.length; i++){
     const book = books[i].borrows
-    for (let i = 0; i < book.length; i++){
-      if (book[i].returned === false){
-        notReturnedBook.push(books[i])
-        break;
-      }
-      if (book[i].returned === true) {
-        returnedBook.push(books[i])
-        break;
-      }
-    }
-  }
-  return [notReturnedBook, returnedBook]
+    splitBooksIntoArrays(book, notReturnedBook, returnedBook)    
+}
+return [notReturnedBook, returnedBook]
 }
 
 function getBorrowersForBook(book, accounts) {
